@@ -10,6 +10,8 @@ import org.jmc.Options;
 import org.jmc.NBT.NBT_Tag;
 import org.jmc.NBT.TAG_Byte;
 import org.jmc.NBT.TAG_Compound;
+import org.jmc.NBT.TAG_Double;
+import org.jmc.NBT.TAG_List;
 import org.jmc.NBT.TAG_Int;
 import org.jmc.NBT.TAG_String;
 import org.jmc.geom.BlockPos;
@@ -18,6 +20,7 @@ import org.jmc.geom.Vertex;
 import org.jmc.registry.NamespaceID;
 import org.jmc.threading.ChunkProcessor;
 import org.jmc.util.Log;
+import org.jmc.util.MathHelper;
 
 
 /**
@@ -145,9 +148,10 @@ public class ItemFrame extends Entity
 	}
 	
 	private BlockPos getBlockPosition(TAG_Compound entity) {
-		int x=((TAG_Int)entity.getElement("TileX")).value;
-		int y=((TAG_Int)entity.getElement("TileY")).value;
-		int z=((TAG_Int)entity.getElement("TileZ")).value;
+        TAG_List pos = (TAG_List) entity.getElement("Pos");
+        int x = MathHelper.floor(((TAG_Double) (pos.elements[0])).value);
+        int y = MathHelper.floor(((TAG_Double) (pos.elements[1])).value);
+        int z = MathHelper.floor(((TAG_Double) (pos.elements[2])).value);
 		return new BlockPos(x, y, z);
 	}
 
