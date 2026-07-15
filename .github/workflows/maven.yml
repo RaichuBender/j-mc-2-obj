@@ -5,9 +5,9 @@ name: j-mc-2-obj Maven build
 
 on:
   push:
-    branches: [ master ]
+    branches: [ "RaichuBender-patch-1" ]
   pull_request:
-    branches: [ master ]
+    branches: [ "RaichuBender-patch-1" ]
 
 jobs:
   build:
